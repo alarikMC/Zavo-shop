@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#09090d">
+<title>ZAVO SMP — Official Store</title>
+<style>
+:root{--bg:#08090e;--panel:#11131b;--panel2:#171a24;--red:#f22d3d;--red2:#ff5965;--gold:#ffc65a;--muted:#a6a9b5;--line:rgba(255,255,255,.09)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 50% -15%,rgba(193,27,43,.23),transparent 42%),var(--bg);color:#f7f7fb;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+a{color:inherit;text-decoration:none}.wrap{width:min(1120px,92%);margin:auto}
+header{position:sticky;top:0;z-index:10;background:rgba(8,9,14,.84);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.nav{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{font-weight:1000;letter-spacing:2px;font-size:1.25rem}.brand span{color:var(--red2)}nav{display:flex;gap:8px;flex-wrap:wrap}nav a,.navbtn{font:inherit;color:#d9dbe4;background:transparent;border:0;padding:10px 13px;border-radius:10px;cursor:pointer}nav a:hover,.navbtn:hover{background:#20232e;color:white}
+.hero{padding:78px 0 55px;text-align:center}.eyebrow{display:inline-block;border:1px solid rgba(255,85,99,.35);background:rgba(242,45,61,.1);color:#ff8c95;padding:7px 13px;border-radius:99px;font-size:.78rem;font-weight:800;letter-spacing:1.5px}.hero h1{font-size:clamp(2.6rem,8vw,5.8rem);line-height:.98;margin:22px 0 14px;letter-spacing:-3px}.hero h1 span{color:var(--red2);text-shadow:0 0 35px rgba(242,45,61,.3)}.hero p{max-width:620px;margin:0 auto;color:var(--muted);line-height:1.7}.actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:26px}.btn{display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:12px;padding:12px 18px;font-weight:800;cursor:pointer;transition:.2s}.btn.primary{background:linear-gradient(135deg,#ff4655,#c7142c);border:0;color:white;box-shadow:0 8px 28px rgba(230,30,55,.2)}.btn.secondary{background:#171923;color:#f2f2f7}.btn:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.server-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:10px auto 60px}.server-box{background:linear-gradient(145deg,#171923,#101118);border:1px solid var(--line);padding:19px;border-radius:16px;text-align:center}.server-box small{display:block;color:var(--muted);margin-bottom:7px}.server-box strong{font-size:1.03rem;overflow-wrap:anywhere}
+section{padding:36px 0 48px;scroll-margin-top:85px}.section-head{display:flex;justify-content:space-between;align-items:end;gap:15px;margin-bottom:22px}.section-head h2{font-size:clamp(1.6rem,4vw,2.2rem);margin:0}.section-head p{color:var(--muted);margin:7px 0 0}.category-bar{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:24px}.category-bar button{border:1px solid var(--line);background:#141620;color:#c9cbd4;padding:10px 16px;border-radius:999px;font-weight:800;cursor:pointer}.category-bar button.active,.category-bar button:hover{background:var(--red);border-color:var(--red);color:white}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{position:relative;overflow:hidden;background:linear-gradient(155deg,#191c27,#101118 75%);border:1px solid var(--line);border-radius:18px;padding:21px;display:flex;flex-direction:column;min-height:255px}.card:before{content:"";position:absolute;width:150px;height:150px;right:-80px;top:-90px;border-radius:50%;background:rgba(242,45,61,.14);filter:blur(4px)}.tag{position:relative;display:inline-block;color:#ff9aa2;background:rgba(242,45,61,.12);padding:5px 9px;border-radius:7px;font-size:.72rem;font-weight:900;letter-spacing:.8px;width:max-content}.card h3{position:relative;font-size:1.35rem;margin:14px 0 7px}.desc{position:relative;color:var(--muted);font-size:.92rem;line-height:1.6;margin:0 0 14px}.price{position:relative;font-size:1.45rem;font-weight:950;color:#fff;margin-top:auto;margin-bottom:15px}.price span{font-size:.75rem;color:var(--muted);font-weight:600}.card-actions{display:flex;gap:8px;flex-wrap:wrap}.card-actions .btn{padding:10px 13px;font-size:.85rem}.details{display:none;color:#c6c8d2;font-size:.86rem;line-height:1.6;border-top:1px solid var(--line);padding-top:12px;margin:0 0 14px}.card.expanded .details{display:block}
+.info-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.info{background:#12141d;border:1px solid var(--line);border-radius:16px;padding:22px}.info h3{margin:0 0 9px}.info p{margin:0;color:var(--muted);line-height:1.7}.notice{margin-top:18px;padding:15px 17px;border:1px solid rgba(255,198,90,.25);background:rgba(255,198,90,.07);border-radius:12px;color:#e9d8b4;font-size:.87rem;line-height:1.6}
+footer{border-top:1px solid var(--line);padding:27px 0;color:var(--muted);font-size:.85rem;text-align:center;margin-top:30px}
+.empty{display:none;color:var(--muted);padding:22px;text-align:center}
+@media(max-width:760px){.nav{padding:12px 0;align-items:flex-start;flex-direction:column}.server-strip{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,1fr)}.hero{padding-top:55px}.section-head{align-items:flex-start;flex-direction:column}}
+@media(max-width:520px){.grid,.info-grid{grid-template-columns:1fr}.card{min-height:225px}.hero h1{letter-spacing:-1.5px}nav{width:100%}nav a{padding:8px 10px;font-size:.88rem}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+  <a class="brand" href="#home">ZAVO<span> SMP</span></a>
+  <nav aria-label="Navigasi utama">
+    <a href="#server">Server</a><a href="#store">Store</a><a href="#rank-monthly">Rank</a><a href="#spawner">Spawner</a><a href="#keys">Keys</a>
+  </nav>
+</div></header>
+
+<main>
+<section class="hero wrap" id="home">
+  <span class="eyebrow">OFFICIAL SERVER STORE</span>
+  <h1>WELCOME TO<br><span>ZAVO SMP</span></h1>
+  <p>Upgrade pengalaman bermainmu dengan rank, spawner, dan keys pilihan. Pilih rank, spawner, atau key favoritmu. Pesan langsung dan konfirmasi pembayaran dengan admin ZAVO SMP.</p>
+  <div class="actions"><a class="btn primary" href="#store">Lihat Store</a><a class="btn secondary" href="#server">Info Server</a></div>
+</section>
+
+<div class="wrap server-strip" id="server">
+  <div class="server-box"><small>JAVA EDITION IP</small><strong id="javaIp">zavomc.my.id:19320</strong><button class="navbtn" onclick="copyText('zavomc.my.id:19320')">Salin IP</button></div>
+  <div class="server-box"><small>BEDROCK EDITION IP</small><strong id="bedrockIp">zavomc.my.id</strong><small>Port: 19177</small><button class="navbtn" onclick="copyText('zavomc.my.id:19177')">Salin IP + Port</button></div>
+  <div class="server-box"><small>JENIS SERVER</small><strong>Minecraft Survival SMP</strong></div>
+</div>
+
+<section class="wrap" id="store">
+  <div class="section-head"><div><h2>Store ZAVO SMP</h2><p>Pilih kategori untuk melihat produk yang kamu inginkan.</p></div></div>
+  <div class="category-bar" role="tablist" aria-label="Kategori produk">
+    <button class="active" data-filter="all">Semua</button><button data-filter="monthly">Rank Bulanan</button><button data-filter="permanent">Rank Permanent</button><button data-filter="spawner">Spawner</button><button data-filter="keys">Keys</button>
+  </div>
+  <div class="grid" id="productGrid">
+    <article class="card" data-category="monthly" id="rank-monthly">
+      <span class="tag">RANK BULANAN</span><h3>ELITE</h3><p class="desc">Akses rank selama satu bulan di server ZAVO SMP.</p><div class="price">Rp10.000</div><div class="card-actions"><button class="btn secondary detail-btn">Detail</button><button class="btn primary" onclick="buy('ELITE','Rp10.000')">Beli Sekarang</button></div>
+    </article>
+    <article class="card" data-category="monthly">
+      <span class="tag">RANK BULANAN</span><h3>ROYAL</h3><p class="desc">Akses rank selama satu bulan di server ZAVO SMP.</p><div class="price">Rp20.000</div><div class="card-actions"><button class="btn secondary detail-btn">Detail</button><button class="btn primary" onclick="buy('ROYAL','Rp20.000')">Beli Sekarang</button></div>
+    </article>
+    <article class="card" data-category="monthly">
+      <span class="tag">RANK BULANAN</span><h3>IMPERIAL</h3><p class="desc">Akses rank selama satu bulan di server ZAVO SMP.</p><div class="price">Rp30.000</div><div class="card-actions"><button class="btn secondary detail-btn">Detail</button><button class="btn primary" onclick="buy('IMPERIAL','Rp30.000')">Beli Sekarang</button></div>
+    </article>
+    <article class="card" data-category="monthly">
+      <span class="tag">RANK BULANAN</span><h3>IMMORTAL</h3><p class="desc">Akses rank selama satu bulan di server ZAVO SMP.</p><div class="price">Rp50.000</div><div class="card-actions"><button class="btn secondary detail-btn">Detail</button><button class="btn primary" onclick="buy('IMMORTAL','Rp50.000')">Beli Sekarang</button></div>
+    </article>
+    <article class="card" data-category="monthly">
+      <span class="tag">RANK BULANAN</span><h3>DEMON</h3><p class="desc">Akses rank selama satu bulan di server ZAVO SMP.</p><div class="price">Rp60.000</div><div class="card-actions"><button class="btn secondary detail-btn">Detail</button><button class="btn primary" onclick="buy('DEMON','Rp60.000')">Beli Sekarang</button></div>
+    </article>
+    <article class="card" data-category="permanent" id="rank-permanent">
+      <span class="tag">RANK PERMANENT</span><h3>ELITE</h3><p class="desc">Rank permanen untuk akun Minecraft-mu di ZAVO SMP.</p><div class="price">Rp30.000</div><div class="card-actions"><button class="btn secondary detail-btn">Detail</button><button class="btn primary" onclick="buy('ELITE','Rp30.000')">Beli Sekarang</button></div>
+    </article>
+    <article class="card" data-category="permanent">
+      <span class="tag">RANK PERMANENT</span><h3>ROYAL</h3><p class="desc">Rank permanen untuk akun Minecraft-mu di ZAVO SMP.</p><div class="price">Rp60.000</div><div class="card-actions"><button class="btn secondary detail-btn">Detail</button><button class="btn primary" onclick="buy('ROYAL','Rp60.000')">Beli Sekarang</button></div>
+    </article>
+    <article class="card" data-category="permanent">
+      <span class="tag">RANK PERMANENT</span><h3>IMPERIAL</h3><p class="desc">Rank permanen untuk akun Minecraft-mu di ZAVO SMP.</p><div class="price">Rp85.000</div><div class="card-actions"><button class="btn secondary detail-btn">Detail</button><button class="btn primary" onclick="buy('IMPERIAL','Rp85.000')">Beli Sekarang</button></div>
+    </article>
+    <article class="card" data-category="permanent">
+      <span class="tag">RANK PERMANENT</span><h3>IMMORTAL</h3><p class="desc">Rank permanen untuk akun Minecraft-mu di ZAVO SMP.</p><div class="price">Rp125.000</div><div class="card-actions"><button class="btn secondary detail-btn">Detail</button><button class="btn primary" onclick="buy('IMMORTAL','Rp125.000')">Beli Sekarang</button></div>
+    </article>
+    <article class="card" data-category="permanent">
+      <span class="tag">RANK PERMANENT</span><h3>DEMON</h3><p class="desc">Rank permanen untuk akun Minecraft-mu di ZAVO SMP.</p><div class="price">Rp175.000</div><div class="card-actions"><button class="btn secondary detail-btn">Detail</button><button class="btn primary" onclick="buy('DEMON','Rp175.000')">Beli Sekarang</button></div>
+    </article>
+    <article class="card" data-category="spawner" id="spawner">
+      <span class="tag">SPAWNER</span><h3>PIG SPAWNER</h3><p class="desc">Spawner Pig untuk digunakan di server ZAVO SMP.</p><div class="price">Rp2.000</div><div class="card-actions"><button class="btn secondary detail-btn">Detail</button><button class="btn primary" onclick="buy('PIG SPAWNER','Rp2.000')">Beli Sekarang</button></div>
+    </article>
+    <article class="card" data-category="spawner">
+      <span class="tag">SPAWNER</span><h3>COW SPAWNER</h3><p class="desc">Spawner Cow untuk digunakan di server ZAVO SMP.</p><div class="price">Rp3.000</div><div class="card-actions"><button class="btn secondary detail-btn">Detail</button><button class="btn primary" onclick="buy('COW SPAWNER','Rp3.000')">Beli Sekarang</button></div>
+    </article>
+    <article class="card" data-category="spawner">
+      <span class="tag">SPAWNER</span><h3>ZOMBIE SPAWNER</h3><p class="desc">Spawner Zombie untuk digunakan di server ZAVO SMP.</p><div class="price">Rp4.000</div><div class="card-actions"><button class="btn secondary detail-btn">Detail</button><button class="btn primary" onclick="buy('ZOMBIE SPAWNER','Rp4.000')">Beli Sekarang</button></div>
+    </article>
+    <article class="card" data-category="spawner">
+      <span class="tag">SPAWNER</span><h3>SKELETON SPAWNER</h3><p class="desc">Spawner Skeleton untuk digunakan di server ZAVO SMP.</p><div class="price">Rp5.000</div><div class="card-actions"><button class="btn secondary detail-btn">Detail</button><button class="btn primary" onclick="buy('SKELETON SPAWNER','Rp5.000')">Beli Sekarang</button></div>
+    </article>
+    <article class="card" data-category="spawner">
+      <span class="tag">SPAWNER</span><h3>CREEPER SPAWNER</h3><p class="desc">Spawner Creeper untuk digunakan di server ZAVO SMP.</p><div class="price">Rp6.000</div><div class="card-actions"><button class="btn secondary detail-btn">Detail</button><button class="btn primary" onclick="buy('CREEPER SPAWNER','Rp6.000')">Beli Sekarang</button></div>
+    </article>
+    <article class="card" data-category="spawner">
+      <span class="tag">SPAWNER</span><h3>BLAZE SPAWNER</h3><p class="desc">Spawner Blaze untuk digunakan di server ZAVO SMP.</p><div class="price">Rp7.000</div><div class="card-actions"><button class="btn secondary detail-btn">Detail</button><button class="btn primary" onclick="buy('BLAZE SPAWNER','Rp7.000')">Beli Sekarang</button></div>
+    </article>
+    <article class="card" data-category="spawner">
+      <span class="tag">SPAWNER</span><h3>IRON GOLEM SPAWNER</h3><p class="desc">Spawner Iron Golem untuk digunakan di server ZAVO SMP.</p><div class="price">Rp8.000</div><div class="card-actions"><button class="btn secondary detail-btn">Detail</button><button class="btn primary" onclick="buy('IRON GOLEM SPAWNER','Rp8.000')">Beli Sekarang</button></div>
+    </article>
+    <article class="card" data-category="keys" id="keys">
+      <span class="tag">KEYS</span><h3>ZAVO KEYS</h3><p class="desc">Key khusus untuk membuka crate ZAVO SMP.</p><div class="price">Rp5.000</div><div class="card-actions"><button class="btn secondary detail-btn">Detail</button><button class="btn primary" onclick="buy('ZAVO KEYS','Rp5.000')">Beli Sekarang</button></div>
+    </article>
+  </div>
+  <div class="empty" id="empty">Belum ada produk di kategori ini.</div>
+  <div class="notice">Semua harga ditampilkan dalam Rupiah. Pilih <b>Beli Sekarang</b> untuk membuat pesan pesanan otomatis ke admin melalui WhatsApp. Pembayaran tersedia melalui <b>QRIS, DANA, dan GoPay</b>. Konfirmasi detail pembayaran kepada admin sebelum melakukan transfer.</div>
+</section>
+
+<section class="wrap">
+  <div class="section-head"><div><h2>Tentang ZAVO SMP</h2><p>Informasi singkat sebelum kamu bergabung.</p></div></div>
+  <div class="info-grid">
+    <div class="info"><h3>Mode Server</h3><p>ZAVO SMP adalah server Minecraft Survival SMP. Pemain dapat menjelajahi dunia, mengumpulkan resource, membangun, dan bermain bersama komunitas.</p></div>
+    <div class="info"><h3>Metode Pembayaran</h3><p>QRIS · DANA · GoPay. Detail pembayaran akan diberikan admin setelah pesanan dikonfirmasi.</p></div>
+    <div class="info"><h3>Hubungi Admin</h3><p>Untuk bantuan dan konfirmasi pesanan, hubungi admin melalui channel Discord <b>#1569939970431647796</b> atau WhatsApp.</p></div>
+  </div>
+</section>
+</main>
+<footer><div class="wrap">❤️ THANK YOU FOR SUPPORTING ZAVO!<br>© <span id="year"></span> ZAVO SMP STORE · Play together, build your legacy.</div></footer>
+
+<script>
+// GANTI nomor di bawah dengan nomor WhatsApp owner.
+// Format: kode negara + nomor, tanpa tanda +, spasi, atau strip. Contoh: 6281234567890
+const OWNER_WA = "6289643573697";
+
+function buy(item, price){
+  if(!OWNER_WA || OWNER_WA.includes("x")){
+    alert("Nomor WhatsApp owner belum diatur. Edit OWNER_WA di bagian script website.");
+    return;
+  }
+  const message = `Halo Owner ZAVO SMP! Saya ingin memesan:\n\nProduk: ${item}\nHarga: ${price}\n\nNickname Minecraft:\nEdisi: Java / Bedrock\nMetode pembayaran:\n\nMohon info langkah pembayaran dan proses pengirimannya. Terima kasih!`;
+  window.open(`https://wa.me/${OWNER_WA}?text=${encodeURIComponent(message)}`,"_blank","noopener");
+}
+function copyText(value){
+  navigator.clipboard.writeText(value).then(()=>alert("IP berhasil disalin!")).catch(()=>alert("Tidak bisa menyalin otomatis. Silakan salin IP secara manual."));
+}
+document.querySelectorAll(".category-bar button").forEach(button=>{
+  button.addEventListener("click",()=>{
+    document.querySelectorAll(".category-bar button").forEach(b=>b.classList.remove("active"));
+    button.classList.add("active");
+    const filter=button.dataset.filter;
+    let shown=0;
+    document.querySelectorAll(".card").forEach(card=>{
+      const visible=filter==="all"||card.dataset.category===filter;
+      card.style.display=visible?"flex":"none";
+      if(visible)shown++;
+    });
+    document.getElementById("empty").style.display=shown?"none":"block";
+  });
+});
+document.querySelectorAll(".detail-btn").forEach(button=>{
+  button.addEventListener("click",()=>{
+    const card=button.closest(".card");
+    card.classList.toggle("expanded");
+    button.textContent=card.classList.contains("expanded")?"Tutup":"Detail";
+  });
+});
+document.getElementById("year").textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
